@@ -105,7 +105,7 @@ class RegisterAMI(Task):
             registration_params['ImageLocation'] = info._ec2['manifest_location']
         else:
             root_dev_name = {'pvm': '/dev/sda',
-                             'hvm': '/dev/xvda'}.get(info.manifest.provider['virtualization'])
+                             'hvm': '/dev/nvme0n1'}.get(info.manifest.provider['virtualization'])
             registration_params['RootDeviceName'] = root_dev_name
 
             block_device = [{'DeviceName': root_dev_name,
