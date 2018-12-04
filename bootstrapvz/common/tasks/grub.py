@@ -14,7 +14,7 @@ class AddGrubPackage(Task):
 
     @classmethod
     def run(cls, info):
-        info.packages.add('grub-pc')
+        info.packages.add('grub-efi-arm64')
 
 
 class InitGrubConfig(Task):
