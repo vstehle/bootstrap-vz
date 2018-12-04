@@ -38,7 +38,9 @@ class BundleImage(Task):
     def run(cls, info):
         bundle_name = 'bundle-' + info.run_id
         info._ec2['bundle_path'] = os.path.join(info.workspace, bundle_name)
-        arch = {'i386': 'i386', 'amd64': 'x86_64'}.get(info.manifest.system['architecture'])
+        arch = {'i386': 'i386',
+                'amd64': 'x86_64',
+                'arm64': 'arm64'}.get(info.manifest.system['architecture'])
         log_check_call(['euca-bundle-image',
                         '--image', info.volume.image_path,
                         '--arch', arch,
@@ -96,7 +98,8 @@ class RegisterAMI(Task):
         registration_params = {'Name': info._ec2['ami_name'],
                                'Description': info._ec2['ami_description']}
         registration_params['Architecture'] = {'i386': 'i386',
-                                               'amd64': 'x86_64'}.get(info.manifest.system['architecture'])
+                                               'amd64': 'x86_64',
+                                               'arm64': 'arm64'}.get(info.manifest.system['architecture'])
 
         if info.manifest.volume['backing'] == 's3':
             registration_params['ImageLocation'] = info._ec2['manifest_location']
