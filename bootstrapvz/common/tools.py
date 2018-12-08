@@ -113,9 +113,13 @@ def load_data(path):
 
 
 def config_get(path, config_path):
+    print('path:', path)
     config = load_data(path)
+    print('config:', config)
     for key in config_path:
+        print('key:', key)
         config = config.get(key)
+        print('config:', config)
     return config
 
 
