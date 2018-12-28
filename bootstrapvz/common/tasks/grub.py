@@ -2,6 +2,7 @@ from bootstrapvz.base import Task
 from ..exceptions import TaskError
 from .. import phases
 from ..tools import log_check_call
+from ..tools import log_call
 from . import filesystem
 from . import kernel
 from bootstrapvz.base.fs import partitionmaps
@@ -340,5 +341,7 @@ class InstallGrub_2(Task):
 
     @classmethod
     def run(cls, info):
+        log_call(['mount'])
+        log_call(['lsblk'])
         log_check_call(['chroot', info.root, 'grub-install', info.volume.device_path])
         log_check_call(['chroot', info.root, 'update-grub'])
